@@ -1,5 +1,11 @@
+import Piano from "./components/Piano";
+
 const App = () => {
-  return <h1>Hello world</h1>;
+  return (
+    <>
+      <Piano />
+    </>
+  );
 };
 
 export default App;
