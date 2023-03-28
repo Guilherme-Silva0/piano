@@ -16,6 +16,22 @@ const App = () => {
     Si: { frequency: 493.883301 },
   };
 
+  const playNote = (note) => {
+    let context = new AudioContext();
+    let oscillator = context.createOscillator();
+
+    oscillator.frequency.value = musicalNotes[note].frequency;
+
+    let volume = context.createGain();
+    volume.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 4);
+
+    oscillator.connect(volume);
+    volume.connect(context.destination);
+
+    oscillator.type = "triangle";
+    oscillator.start();
+  };
+
   return (
     <>
       <Piano />
