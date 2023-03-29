@@ -35,6 +35,9 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
+button{
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
 ol, ul {
 	list-style: none;
 }
