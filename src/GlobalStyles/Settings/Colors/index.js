@@ -6,6 +6,7 @@ const Colors = createGlobalStyle`
         --color-negative: #111;
         --color-fist: #1f2937;
         --color-second: #111827;
+        --color-third: #0099dd;
     }
 `;
 
