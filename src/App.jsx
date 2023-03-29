@@ -16,17 +16,37 @@ const musicalNotes = {
   Si: { frequency: 493.883301 },
 };
 
+const keyToButtonMap = {
+  a: "Do",
+  w: "Do#",
+  s: "Re",
+  e: "Re#",
+  d: "Mi",
+  f: "Fa",
+  t: "Fa#",
+  g: "Sol",
+  y: "Sol#",
+  h: "La",
+  u: "La#",
+  j: "Si",
+};
+
+let audioContext = null;
+
 const App = () => {
-  const [audioContext, setAudioContext] = useState(null);
+  const [audioActived, setAudioActived] = useState(null);
+  const [isPressedKeys, setIsPressedKeys] = useState({});
+  const [pressedKey, setPressedKey] = useState("");
 
   useEffect(() => {
-    const context = new AudioContext();
-    setAudioContext(context);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
 
     return () => {
-      context.close();
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
     };
-  }, []);
+  }, [isPressedKeys]);
 
   const playNote = (note) => {
     if (!audioContext) return;
@@ -40,20 +60,65 @@ const App = () => {
       audioContext.currentTime + 4
     );
 
+    volume.gain.value = 0.6;
+
     oscillator.connect(volume);
     volume.connect(audioContext.destination);
 
     oscillator.type = "triangle";
     oscillator.start();
+    console.log("eita");
 
     setTimeout(() => {
       oscillator.stop();
     }, 4000);
   };
 
+  const handleAudioContext = () => {
+    if (!audioContext) {
+      audioContext = new AudioContext();
+      setAudioActived(true);
+    }
+
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+      setAudioActived(true);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (
+      !keyToButtonMap[e.key.toLowerCase()] ||
+      isPressedKeys[e.key.toLowerCase()]
+    )
+      return;
+    setIsPressedKeys((prevState) => ({
+      ...prevState,
+      [e.key.toLowerCase()]: true,
+    }));
+    playNote(keyToButtonMap[e.key.toLowerCase()]);
+  };
+
+  const handleKeyUp = (e) => {
+    if (!keyToButtonMap[e.key.toLowerCase()]) return;
+    setIsPressedKeys((prevState) => ({
+      ...prevState,
+      [e.key.toLowerCase()]: false,
+    }));
+    setPressedKey(e.key.toLowerCase());
+  };
+
   return (
     <>
-      <Piano playNote={playNote} />
+      {!audioActived ? (
+        <button onClick={handleAudioContext}>Start Audio</button>
+      ) : pressedKey === "" ? (
+        <Piano playNote={playNote} />
+      ) : (
+        <>
+          <p>{pressedKey}</p> <Piano playNote={playNote} />
+        </>
+      )}
     </>
   );
 };
