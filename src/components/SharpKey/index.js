@@ -6,11 +6,17 @@ const SharpKey = styled.button.attrs((props) => ({
   background-color: var(--color-negative);
   border: none;
   border-radius: 0 0 15px 15px;
-  padding: 0;
   width: 50%;
   height: 55%;
   cursor: pointer;
   transition: 0.2s;
+  color: var(--color-zero);
+  font-size: 2vw;
+  font-weight: bold;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  padding-bottom: 20px;
 
   &:active {
     opacity: 0.8;
