@@ -11,7 +11,7 @@ const PianoStyles = styled.div`
 
   & button[data-note*="#"] {
     z-index: 9;
-    margin: 0 calc((-75vw / 7) - (-40vw / 5));
+    margin: 0 calc((-77vw / 7) - (-40vw / 5));
   }
 `;
 
