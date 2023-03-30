@@ -112,12 +112,8 @@ const App = () => {
     <>
       {!audioActived ? (
         <button onClick={handleAudioContext}>Start Audio</button>
-      ) : pressedKey === "" ? (
-        <Piano playNote={playNote} />
       ) : (
-        <>
-          <p>{pressedKey}</p> <Piano playNote={playNote} />
-        </>
+        <Piano playNote={playNote} pressedKey={pressedKey} />
       )}
     </>
   );
