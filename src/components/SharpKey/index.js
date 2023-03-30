@@ -17,6 +17,7 @@ const SharpKey = styled.button.attrs((props) => ({
   align-items: end;
   justify-content: center;
   padding-bottom: 20px;
+  outline: none;
 
   &:active {
     opacity: 0.8;
