@@ -38,6 +38,14 @@ const App = () => {
   const [audioActived, setAudioActived] = useState(null);
   const [isPressedKeys, setIsPressedKeys] = useState({});
   const [pressedKey, setPressedKey] = useState("");
+  const [isHorizontal, setIsHorizontal] = useState(false);
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -109,10 +117,28 @@ const App = () => {
     setPressedKey(e.key.toLowerCase());
   };
 
+  const handleResize = () => {
+    if (window.innerWidth > window.innerHeight) {
+      setIsHorizontal(true);
+    } else {
+      setIsHorizontal(false);
+    }
+  };
+
   return (
     <>
-      {!audioActived ? <Confirm handleAudioContext={handleAudioContext} /> : ""}
-      <Piano playNote={playNote} pressedKey={pressedKey} />
+      {!isHorizontal ? (
+        "Gire a tela"
+      ) : (
+        <>
+          {!audioActived ? (
+            <Confirm handleAudioContext={handleAudioContext} />
+          ) : (
+            ""
+          )}
+          <Piano playNote={playNote} pressedKey={pressedKey} />
+        </>
+      )}
     </>
   );
 };
