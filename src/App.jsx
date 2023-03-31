@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Piano from "./components/Piano";
+import Confirm from "./components/Confirm";
 
 const musicalNotes = {
   Do: { frequency: 261.625519 },
@@ -110,11 +111,8 @@ const App = () => {
 
   return (
     <>
-      {!audioActived ? (
-        <button onClick={handleAudioContext}>Start Audio</button>
-      ) : (
-        <Piano playNote={playNote} pressedKey={pressedKey} />
-      )}
+      {!audioActived ? <Confirm handleAudioContext={handleAudioContext} /> : ""}
+      <Piano playNote={playNote} pressedKey={pressedKey} />
     </>
   );
 };
