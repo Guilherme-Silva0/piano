@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Piano from "./components/Piano";
 import Confirm from "./components/Confirm";
+import RotateScreen from "./components/RotateScreen";
 
 const musicalNotes = {
   Do: { frequency: 261.625519 },
@@ -76,7 +77,6 @@ const App = () => {
 
     oscillator.type = "triangle";
     oscillator.start();
-    console.log("eita");
 
     setTimeout(() => {
       oscillator.stop();
@@ -120,6 +120,8 @@ const App = () => {
   const handleResize = () => {
     if (window.innerWidth > window.innerHeight) {
       setIsHorizontal(true);
+    } else if (window.innerWidth === window.innerHeight) {
+      setIsHorizontal(true);
     } else {
       setIsHorizontal(false);
     }
@@ -128,7 +130,7 @@ const App = () => {
   return (
     <>
       {!isHorizontal ? (
-        "Gire a tela"
+        <RotateScreen />
       ) : (
         <>
           {!audioActived ? (
