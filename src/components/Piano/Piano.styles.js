@@ -4,8 +4,8 @@ const PianoStyles = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 80vw;
-  height: calc(88vw / 3);
+  width: 85vw;
+  height: calc(90vw / 3);
   background-color: var(--color-fist);
   padding: 8px 30px 30px;
   border-radius: 15px;
@@ -27,7 +27,7 @@ const PianoStyles = styled.div`
 
   & .keys-container button[data-note*="#"] {
     z-index: 9;
-    margin: 0 calc((-76.3vw / 7) - (-40vw / 5));
+    margin: 0 calc((-77.8vw / 7) - (-40vw / 5));
   }
 `;
 
