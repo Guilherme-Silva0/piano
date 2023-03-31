@@ -13,6 +13,7 @@ const PainelStyles = styled.div`
     text-align: center;
     text-transform: uppercase;
     font-size: 3vw;
+    font-weight: bold;
     color: var(--color-third);
     filter: drop-shadow(0 0 10px var(--color-third));
   }
